@@ -38,3 +38,7 @@ Route::post("/create-doctor", [AdminController::class, "store"])->name("create-d
 Route::post("/create-appointment", [HomeController::class, "createAppointment"])->name("create-appointment");
 Route::get("/appointment", [HomeController::class, "appointment"])->name("appointment")->middleware("auth");
 Route::get("/cancel-appointment/{id}", [HomeController::class, "cancelAppointment"])->name("cancel-appointment");
+//admin list appointment
+Route::get("/appointments", [AdminController::class, "appointment"])->name("appointments")->middleware("auth");
+Route::get("/cancel-appointments/{id}", [AdminController::class, "cancelAppointment"])->name("cancel-appointments");
+Route::get("/approved/{id}", [AdminController::class, "approved"])->name("approved");

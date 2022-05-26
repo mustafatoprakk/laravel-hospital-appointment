@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Appointment;
 use App\Models\Doctor;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -42,12 +44,12 @@ class AdminController extends Controller
         $doctor->image = $imagename;
 
         $doctor->name = $request->name;
-        $doctor->phone = $request->phone; 
+        $doctor->phone = $request->phone;
         $doctor->room = $request->room;
         $doctor->specialty = $request->specialty;
         $doctor->save();
-        
-        return redirect()->back()->with("message","Doctor created");
+
+        return redirect()->back()->with("message", "Doctor created");
     }
 
     /**
@@ -93,5 +95,30 @@ class AdminController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    // appointment
+    public function appointment()
+    {
+        $appointments = Appointment::all();
+        $doctors = Doctor::all();
+        $users = User::all();
+        return view("admin.appointment", compact("appointments", "doctors", "users"));
+    }
+    public function cancelAppointment($id)
+    {
+        Appointment::find($id)->update([
+            "status" => "canceled",
+        ]);
+
+        return redirect()->back()->with("message", "Appointment canceled");
+    }
+    public function approved($id)
+    {
+        Appointment::find($id)->update([
+            "status" => "approved",
+        ]);
+
+        return redirect()->back()->with("message", "Appointment confirmed");
     }
 }
