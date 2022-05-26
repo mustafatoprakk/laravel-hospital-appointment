@@ -16,6 +16,8 @@ class AdminController extends Controller
      */
     public function index()
     {
+        $doctors = Doctor::all();
+        return view("admin.doctors", compact("doctors"));
     }
 
     /**
@@ -94,7 +96,10 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $doctor = Doctor::find($id);
+        unlink("doctorimage/" . $doctor->image);
+        $doctor->delete();
+        return redirect()->back()->with("message", "Doctor deleted.");
     }
 
     // appointment

@@ -31,8 +31,11 @@ Route::middleware([
 
 Route::get("/home", [HomeController::class, "redirect"]);
 
+// admin doctors
 Route::get("/doctor", [AdminController::class, "create"]);
 Route::post("/create-doctor", [AdminController::class, "store"])->name("create-doctor");
+Route::get("/doctors", [AdminController::class, "index"])->name("doctors");
+Route::get("/delete-doctors/{id}", [AdminController::class, "destroy"])->name("delete-doctors");
 
 //appointment
 Route::post("/create-appointment", [HomeController::class, "createAppointment"])->name("create-appointment");
