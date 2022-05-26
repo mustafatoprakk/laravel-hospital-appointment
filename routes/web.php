@@ -33,3 +33,6 @@ Route::get("/home", [HomeController::class, "redirect"]);
 
 Route::get("/doctor", [AdminController::class, "create"]);
 Route::post("/create-doctor", [AdminController::class, "store"])->name("create-doctor");
+
+//appointment
+Route::post("/create-appointment", [HomeController::class, "createAppointment"])->name("create-appointment");
