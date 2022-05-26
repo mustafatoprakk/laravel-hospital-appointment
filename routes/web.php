@@ -36,3 +36,5 @@ Route::post("/create-doctor", [AdminController::class, "store"])->name("create-d
 
 //appointment
 Route::post("/create-appointment", [HomeController::class, "createAppointment"])->name("create-appointment");
+Route::get("/appointment", [HomeController::class, "appointment"])->name("appointment")->middleware("auth");
+Route::get("/cancel-appointment/{id}", [HomeController::class, "cancelAppointment"])->name("cancel-appointment");

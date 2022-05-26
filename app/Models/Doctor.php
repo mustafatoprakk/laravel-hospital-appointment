@@ -9,6 +9,13 @@ class Doctor extends Model
 {
     use HasFactory;
 
+    protected $table = "doctors";
+    protected $fillable = [
+        "name", "phone", "specialty", "room", "image"
+    ];
 
-    
+    public function appointment()
+    {
+        return $this->hasMany(Appointment::class);
+    }
 }

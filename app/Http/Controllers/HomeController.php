@@ -46,13 +46,25 @@ class HomeController extends Controller
             "name" => $request->name,
             "email" => $request->email,
             "phone" => $request->phone,
-            "doctor" => $request->doctor,
+            "doctor_id" => $request->doctor,
             "date" => $request->date,
             "message" => $request->message,
             "status" => "In progress",
             "user_id" => $user_id
         ]);
 
-        return redirect()->back()->with("message","Appointment request successfuly. We will contact with you soon.");
+        return redirect()->back()->with("message", "Appointment request successfuly. We will contact with you soon.");
+    }
+    public function appointment()
+    {
+        $appointments = Appointment::where("user_id", Auth::user()->id)->get();
+        $doctors = Doctor::all();
+        return view("user.appointment_list", compact("appointments", "doctors"));
+    }
+    public function cancelAppointment($id)
+    {
+        $appointemrnt = Appointment::find($id);
+        $appointemrnt->delete();
+        return redirect()->back()->with("message", "Appointment deleted");
     }
 }
