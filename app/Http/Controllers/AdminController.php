@@ -103,7 +103,7 @@ class AdminController extends Controller
         $doctor->room = $request->room;
         $doctor->update();
 
-        return redirect()->back();
+        return redirect()->back()->with("message", "Doctor updated.");
     }
 
     /**

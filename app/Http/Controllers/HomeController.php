@@ -36,6 +36,11 @@ class HomeController extends Controller
     }
 
     //appointemnt
+    public function goToAppointment()
+    {
+        $doctors = Doctor::all();
+        return view("user.appointment", compact("doctors"));
+    }
     public function createAppointment(Request $request)
     {
         if (Auth::id()) {

@@ -29,7 +29,7 @@ Route::middleware([
 });
 
 
-Route::get("/home", [HomeController::class, "redirect"]);
+Route::get("/home", [HomeController::class, "redirect"])->middleware("auth");
 
 // admin doctors
 Route::get("/doctor", [AdminController::class, "create"]);
@@ -40,6 +40,7 @@ Route::get("/edit-doctor/{id}", [AdminController::class, "edit"])->name("edit-do
 Route::post("/update-doctor", [AdminController::class, "update"])->name("update-doctor");
 
 //appointment
+Route::get("/store-appointment", [HomeController::class, "goToAppointment"])->name("create-appointment");
 Route::post("/create-appointment", [HomeController::class, "createAppointment"])->name("create-appointment");
 Route::get("/appointment", [HomeController::class, "appointment"])->name("appointment")->middleware("auth");
 Route::get("/cancel-appointment/{id}", [HomeController::class, "cancelAppointment"])->name("cancel-appointment");
