@@ -47,13 +47,13 @@
                                     <th scope="row">{{ $count++ }}</th>
                                     <td>{{ $doctor->name }}</td>
                                     <td>{{ $doctor->phone }}</td>
-                                    <td>{{ $doctor->Specialty }}</td>
+                                    <td>{{ $doctor->specialty }}</td>
                                     <td>{{ $doctor->room }}</td>
                                     <td>
                                         <img src="doctorimage/{{ $doctor->image }}" alt="">
                                     </td>
                                     <td>
-                                        <a href="" class="btn btn-primary">Update</a>
+                                        <a href="{{ route('edit-doctor', $doctor->id) }}" class="btn btn-primary">Update</a>
                                         <a href="{{ route("delete-doctors", $doctor->id) }}" class="btn btn-danger">Delete</a>
                                     </td>
                                   </tr>

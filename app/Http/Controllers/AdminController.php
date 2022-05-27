@@ -6,6 +6,8 @@ use App\Models\Appointment;
 use App\Models\Doctor;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
@@ -73,7 +75,8 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        //
+        $doctor = Doctor::find($id);
+        return view("admin.edit_doctor", compact("doctor"));
     }
 
     /**
@@ -83,9 +86,24 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $doctor = Doctor::findOrFail($request->id);
+        if ($request->image) {
+            unlink("doctorimage/".$request->oldimage);
+            $image = $request->image;
+            $imagename = time() . "." . $image->getClientOriginalExtension();
+            $request->image->move('doctorimage', $imagename);
+            $doctor->image = $imagename;
+        }
+
+        $doctor->name = $request->name;
+        $doctor->phone = $request->phone;
+        $doctor->specialty = $request->specialty;
+        $doctor->room = $request->room;
+        $doctor->update();
+
+        return redirect()->back();
     }
 
     /**

@@ -36,6 +36,8 @@ Route::get("/doctor", [AdminController::class, "create"]);
 Route::post("/create-doctor", [AdminController::class, "store"])->name("create-doctor");
 Route::get("/doctors", [AdminController::class, "index"])->name("doctors");
 Route::get("/delete-doctors/{id}", [AdminController::class, "destroy"])->name("delete-doctors");
+Route::get("/edit-doctor/{id}", [AdminController::class, "edit"])->name("edit-doctor");
+Route::post("/update-doctor", [AdminController::class, "update"])->name("update-doctor");
 
 //appointment
 Route::post("/create-appointment", [HomeController::class, "createAppointment"])->name("create-appointment");
